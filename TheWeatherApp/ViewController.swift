@@ -47,7 +47,7 @@ extension ViewController: UISearchBarDelegate {
                 
                 DispatchQueue.main.async {
                     self?.cityLabel.text = locationName
-                    self?.temperatureLabel.text = "\(temperature)"
+                    self?.temperatureLabel.text = "\(temperature!)"
                 }
                 
                 
