@@ -21,6 +21,9 @@ class ViewController: UIViewController {
 }
 extension ViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.resignFirstResponder() //убрать клавиатуру
+        
+        
         let urlString = "http://api.weatherstack.com/current?access_key=181e6509550bb271d8f6aca1bc3fd96a&query=\(searchBar.text!)"
         
         let url = URL(string: urlString)
@@ -29,7 +32,7 @@ extension ViewController: UISearchBarDelegate {
         var temperature: Double?
         
         
-        let task = URLSession.shared.dataTask(with: url!) { (data, response, error) in
+        let task = URLSession.shared.dataTask(with: url!) {[weak self] (data, response, error) in
             do {
                 let json = try JSONSerialization.jsonObject(with: data!, options: .mutableContainers) as! [String : AnyObject]
                 
@@ -38,7 +41,13 @@ extension ViewController: UISearchBarDelegate {
                 }
                 
                 if let current = json["current"] {
-                    temperature = current["temp_c"] as? Double
+                    temperature = current["temperature"] as? Double
+                }
+                
+                
+                DispatchQueue.main.async {
+                    self?.cityLabel.text = locationName
+                    self?.temperatureLabel.text = "\(temperature)"
                 }
                 
                 
