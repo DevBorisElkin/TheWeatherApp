@@ -10,6 +10,8 @@ import UIKit
 class ViewController: UIViewController {
 
     
+    @IBOutlet weak var temperatureLabel: UILabel!
+    @IBOutlet weak var cityLabel: UILabel!
     @IBOutlet weak var searchBar: UISearchBar!
     
     override func viewDidLoad() {
