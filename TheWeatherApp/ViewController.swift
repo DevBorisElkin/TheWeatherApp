@@ -24,7 +24,7 @@ extension ViewController: UISearchBarDelegate {
         searchBar.resignFirstResponder() //убрать клавиатуру
         
         
-        let urlString = "http://api.weatherstack.com/current?access_key=181e6509550bb271d8f6aca1bc3fd96a&query=\(searchBar.text!)"
+        let urlString = "http://api.weatherstack.com/current?access_key=181e6509550bb271d8f6aca1bc3fd96a&query=\(searchBar.text!.replacingOccurrences(of: " ", with: "%20"))"
         
         let url = URL(string: urlString)
         
